@@ -1,7 +1,14 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import Box from '@src/pages/_components/Box.tsx'
+import { useThree } from '@react-three/fiber'
 
 export default function Scene() {
+  const { camera } = useThree()
+
+  useEffect(() => {
+    camera.position.set(0, 0, 10)
+  }, [])
+
   return (
     <Suspense fallback={null}>
       <ambientLight intensity={Math.PI / 2} />
