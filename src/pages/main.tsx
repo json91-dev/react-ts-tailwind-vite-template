@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 export default function MainPage() {
   const navigate = useNavigate()
   return (
-    <div className={'flex justify-center border-2 text-[2rem]'} onClick={() => navigate('/ar')}>
+    <div className={'flex justify-center border-2 text-[2rem]'} onClick={() => navigate('/r3f/box')}>
       <p>AR 페이지 이동2</p>
     </div>
   )
