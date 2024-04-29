@@ -1,6 +1,6 @@
 import { useThree } from '@react-three/fiber'
 import React, { Suspense, useEffect } from 'react'
-import Box from '@src/pages/_components/Box.tsx'
+import Box from '@src/components/Box.tsx'
 export default function BoxPage() {
   const { camera } = useThree()
 

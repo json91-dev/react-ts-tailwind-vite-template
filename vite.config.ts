@@ -9,12 +9,12 @@ import imageminSvgo from 'imagemin-svgo'
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'github-actions-prod' || mode === 'github-actions-build'
-  
+
   process.env = {
     ...process.env,
     ...loadEnv(mode, process.cwd(), ''),
   }
-  
+
   return {
     base: '/',
     server: {
@@ -22,9 +22,9 @@ export default defineConfig(({ mode }) => {
       https:
         mode === 'development'
           ? {
-            key: './test-key.pem',
-            cert: './test.pem',
-          }
+              key: './test-key.pem',
+              cert: './test.pem',
+            }
           : false,
     },
     optimizeDeps: {
@@ -35,16 +35,17 @@ export default defineConfig(({ mode }) => {
       tsconfigPaths(),
       isProd && splitVendorChunkPlugin(),
       isProd && viteCompression(),
+      // @ts-ignore
       isProd &&
-      viteImagemin({
-        plugins: {
-          jpg: imageminMozjpeg(),
-          png: imageminPngquant(),
-          svg: imageminSvgo(),
-        },
-      }),
+        viteImagemin({
+          plugins: {
+            jpg: imageminMozjpeg(),
+            png: imageminPngquant(),
+            svg: imageminSvgo(),
+          },
+        }),
     ],
-    assetsInclude: ['**/*.glb', '**/*.usdz', '**/*.hdr', '**/*.exr', '**/*.ktx2', '**/*.obj'],
+    assetsInclude: ['**/*.glb', '**/*.usdz', '**/*.hdr', '**/*.exr', '**/*.ktx2', '**/*.obj', '**/*.png'],
     build: {
       sourcemap: true, // Production 배포시 False로 설정
       outDir: 'build',
@@ -55,19 +56,19 @@ export default defineConfig(({ mode }) => {
           assetFileNames: (assetInfo) => {
             let extType = assetInfo.name.split('.').pop()
             if (/png|svg|jpe?g|ico|webp|gif|hdr|exr|ktx2/i.test(extType)) {
-              extType = 'media/images'
+              extType = '/images'
             } else if (/glb|usdz/i.test(extType)) {
-              extType = 'media/models'
+              extType = '/models'
             } else if (/mp3|wav/i.test(extType)) {
-              extType = 'media/sounds'
+              extType = '/sounds'
             } else if (/mov|mp4|webm/i.test(extType)) {
-              extType = 'media/videos'
+              extType = '/videos'
             } else if (/woff|woff2|eot|ttf|otf/i.test(extType)) {
-              extType = 'media/fonts'
+              extType = '/fonts'
             } else if (/json/i.test(extType)) {
-              extType = 'media/json'
+              extType = '/json'
             } else if (/tflite/i.test(extType)) {
-              extType = 'media/tflite'
+              extType = '/tflite'
             }
             return `static/${extType}/[name]-[hash][extname]`
           },
@@ -76,4 +77,3 @@ export default defineConfig(({ mode }) => {
     },
   }
 })
-
