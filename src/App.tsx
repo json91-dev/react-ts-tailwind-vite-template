@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Navigate } from 'react-router-dom'
 import { lazy } from 'react'
 import MainLayout from '@src/layouts/MainLayout.tsx'
 const MainPage = lazy(() => import('@src/pages/main.tsx'))
@@ -11,6 +11,7 @@ export default function App() {
         <Route index element={<MainPage />} />
       </Route>
       <Route path={'/image'} element={<ImagePage />} />
+      <Route path='/*' element={<Navigate to={'/'} />} />
     </Routes>
   )
 }
