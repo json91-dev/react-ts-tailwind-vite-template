@@ -6,6 +6,7 @@ import viteImagemin from '@vheemstra/vite-plugin-imagemin'
 import imageminMozjpeg from 'imagemin-mozjpeg'
 import imageminPngquant from 'imagemin-pngquant'
 import imageminSvgo from 'imagemin-svgo'
+import glslify from 'rollup-plugin-glslify'
 
 export default defineConfig(({ mode }) => {
   const isProd = mode === 'github-actions-prod' || mode === 'github-actions-build'
@@ -31,6 +32,7 @@ export default defineConfig(({ mode }) => {
       exclude: ['mp4-wasm'],
     },
     plugins: [
+      glslify(),
       react(),
       tsconfigPaths(),
       isProd && splitVendorChunkPlugin(),
