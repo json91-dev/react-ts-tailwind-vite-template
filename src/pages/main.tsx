@@ -1,5 +1,4 @@
 import React from 'react'
-import MainLayout from '@src/layouts/MainLayout.tsx'
 import { useNavigate } from 'react-router-dom'
 export default function MainPage() {
   const navigate = useNavigate()
