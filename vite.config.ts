@@ -8,7 +8,7 @@ import imageminPngquant from 'imagemin-pngquant'
 import imageminSvgo from 'imagemin-svgo'
 
 export default defineConfig(({ mode }) => {
-  const isProd = mode === 'github-actions-prod' || mode === 'github-actions-build'
+  const isProd = mode === 'production'
 
   process.env = {
     ...process.env,
